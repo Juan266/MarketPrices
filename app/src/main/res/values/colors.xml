@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="purple_200">#FFBB86FC</color>
+	<color name="purple_500">#FF6200EE</color>
+	<color name="purple_700">#FF3700B3</color>
+	<color name="teal_200">#FF03DAC5</color>
+	<color name="teal_700">#FF018786</color>
+	<color name="black">#FF000000</color>
+	<color name="white">#FFFFFFFF</color>
+
+	<color name="colorPrimary">#008577</color>
+	<color name="colorPrimaryDark">#00574B</color>
+	<color name="colorAccent">#D81B60</color>
+
+	<color name="java">#1AB8B6</color>
+	<color name="eastern_blue">#18ABA8</color>
+	<color name="mountain_meadow">#23D160</color>
+	<color name="salem">#03952F</color>
+	<color name="gray_dove">#6E6E6E</color>
+	<color name="tundora">#4A4A4A</color>
+	<color name="rose_texas">#D4AC0D</color>
+	<color name="apple_variation">#689F38</color>
+	<color name="alizarin_crimson">#EA1B20</color>
+	<color name="shark">#303133</color>
+	<color name="jumbo">#8D8D8F</color>
+	<color name="transparent">#00000000</color>
+	<color name="pink">#FEE6FE</color>
+	<color name="burgundy">#922B21</color>
+
+	<color name="my_trade_yellow">#efb82d</color>
+	<color name="my_trade_dark_gray">#161a1e</color>
+	<color name="my_trade_medium_gray">#1e2329</color>
+
+	<color name="my_trade_gray_1">#b7bdc6</color>
+
+	<color name="my_trade_ultra_ligth_green">#D8E4D9</color>
+	<color name="my_trade_ultra_ligth_red">#F6E7E2</color>
+	<color name="my_trade_ultra_ligth_blue">#FBFBFB</color>
+
+	<color name="my_trade_blue">#137FBE</color>
+	<color name="my_trade_light_orange">#FBE5D4</color>
+	<color name="my_trade_medium_orange">#ffbf80</color>
+
+
+	<color name="my_trade_light_green">#C2EBE2</color>
+	<color name="my_trade_medium_green">#8CCDBE</color>
+
+	<color name="my_trade_red">#F95D6B</color>
+</resources>

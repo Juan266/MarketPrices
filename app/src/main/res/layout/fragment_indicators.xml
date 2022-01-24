@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<com.stock.market.ui.components.MarketFilterView
+				android:id="@+id/indicator_market_filter"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="visible"
+				android:background="@color/my_trade_dark_gray"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"/>
+
+			<com.stock.market.ui.components.IndicatorGroupView
+				android:id="@+id/indicator_group_percentage_gainers"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/indicator_market_filter">
+			</com.stock.market.ui.components.IndicatorGroupView>
+
+			<com.stock.market.ui.components.IndicatorGroupView
+				android:id="@+id/indicator_group_percentage_losers"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/indicator_group_percentage_gainers">
+			</com.stock.market.ui.components.IndicatorGroupView>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</ScrollView>
+
+</layout>

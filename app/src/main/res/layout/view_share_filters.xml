@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/share_list_filters_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:textAllCaps="true"
+        tools:text="Filters: "
+        android:textSize="10sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/share_list_filters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/share_list_filters_text"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:requiresFadingEdge="horizontal" />
+
+</RelativeLayout>

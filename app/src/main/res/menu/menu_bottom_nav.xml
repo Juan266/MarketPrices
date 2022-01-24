@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/panel"
+        android:title="Panel"
+        android:icon="@drawable/ic_view_list_24dp"/>
+
+    <item
+      android:id="@+id/indicators"
+      android:title="Indicators"
+      android:icon="@drawable/ic_playlist_24dp"/>
+
+</menu>

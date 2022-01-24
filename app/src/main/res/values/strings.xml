@@ -1,0 +1,109 @@
+<resources>
+	<string name="app_name">Stock Market</string>
+	<string name="error_message">Oops! Something went wrong, we are working on it!</string>
+
+	<string name="price_start_acquire">Start acquire</string>
+	<string name="price_end_acquire">End acquire</string>
+
+	<string name="price_last">Last Price: %1$s</string>
+	<string name="price_variation">Price Variation: %1$s</string>
+	<string name="price_opening">Price Opening: %1$s</string>
+	<string name="price_max">Price Max: %1$s</string>
+	<string name="price_min">Price Min: %1$s</string>
+	<string name="price_date">Price Date: %1$s</string>
+	<string name="price_trend">Price Trend: %1$s</string>
+	<string name="price_former_close">Price Former Close: %1$s</string>
+	<string name="price_total_amount">Price Total Amount: %1$s</string>
+
+	<string name="calc_button">Calculate</string>
+	<string name="calc_clear_button">Clear</string>
+	<string name="calc_is_intra_day">Intra day</string>
+	<string name="calc_amount_hint">Amount</string>
+	<string name="calc_buy_price_hint">Buy Price</string>
+	<string name="calc_sell_price_hint">Sell Price</string>
+	<string name="calc_revenue_hint">Revenue expected</string>
+	<string name="calc_result_hint">Result</string>
+
+	<string name="info_prices_dialog_title">Info Price</string>
+	<string name="info_prices_dialog_message">Max Min:  %1$s\nMax Open: %2$s\nClose Max: %3$s\nTotal Amount: %4$s</string>
+	<string name="info_prices_dialog_ok">OK</string>
+	<string name="info_prices_dialog_cancel">Cancel</string>
+
+	<string name="operation_custom_buy_points">%1$s %2$s</string>
+	<string name="operation_custom_sell_points">%1$s %2$s</string>
+
+	<string name="operation_custom_dialog_price_open">Open: %1$s</string>
+	<string name="operation_custom_dialog_price_variation">Var: %1$s</string>
+	<string name="operation_custom_dialog_price_min">Mix: %1$s</string>
+	<string name="operation_custom_dialog_price_max">Max: %1$s</string>
+	<string name="operation_custom_dialog_price_amount">Amount: %1$s</string>
+	<string name="operation_custom_dialog_price_time">Time: %1$s</string>
+
+	<string name="one_operation_custom_percentage_variation">%1$s\%%</string>
+	<string name="one_operation_custom_min_price">Min Price  %1$s</string>
+	<string name="one_operation_custom_max_price">Max Price  %1$s</string>
+	<string name="one_operation_custom_open_price">Op Price  %1$s</string>
+	<string name="one_operation_custom_volume">Volume  %1$s</string>
+
+	<string name="panel_holder_share_variation">%1$s %2$s</string>
+
+	<string name="login_user_name_hint">User Name</string>
+	<string name="login_user_password_hint">User Password</string>
+	<string name="login_button">Login</string>
+	<string name="login_user_password_incorrect">Data entered are incorrect. Please try again</string>
+
+	<string name="settings_testing_env_option">Testing (Sandbox)</string>
+	<string name="settings_prod_env_option">Prod</string>
+	<string name="settings_done_button">DONE</string>
+
+	<string name="price_history_date">Date</string>
+	<string name="price_history_open">Open</string>
+	<string name="price_history_min">Min</string>
+	<string name="price_history_max">Max</string>
+	<string name="price_history_close">Close</string>
+	<string name="price_history_var">Var</string>
+
+	<string name="price_history_general_share_edt">Share</string>
+	<string name="price_history_general_since_edt">Since</string>
+	<string name="price_history_general_to_edt">To</string>
+	<string name="price_history_general_get_button">GET PRICES</string>
+
+	<string name="date_format_hyphen">%1$s-%2$s-%3$s</string>
+	<string name="date_format_slash">%1$s/%2$s/%3$s</string>
+	<string name="date_time">%1$sT%2$s</string>
+
+	<string name="buy_share_dialog_title">BUYING</string>
+	<string name="buy_share_dialog_message">You are going to BUY:\n\n%1$s pesos in %2$s shares.\n\nPrice: %3$s</string>
+	<string name="buy_share_dialog_ok">BUY</string>
+	<string name="buy_share_dialog_cancel">NO</string>
+
+	<string name="sell_share_dialog_title">SELLING</string>
+	<string name="sell_share_dialog_message">You are going to SELL:\n\n%1$s %2$s shares.\n\nPrice: %3$s</string>
+	<string name="sell_share_dialog_ok">SELL</string>
+	<string name="sell_share_dialog_cancel">NO</string>
+
+	<string name="cancel_operation_dialog_title">CANCELLING</string>
+	<string name="cancel_operation_dialog_message">You are going CANCEL</string>
+	<string name="cancel_operation_dialog_ok">CANCEL</string>
+	<string name="cancel_operation_dialog_cancel">NO</string>
+
+	<string name="price_general_history_dialog_title">Alert</string>
+	<string name="price_general_history_dialog_message">You must to complete all fields</string>
+	<string name="price_general_history_dialog_ok">OK</string>
+
+	<!--menu-->
+	<string name="menu_my_trade_calculator">Calc</string>
+	<string name="menu_oc_global_indexs">Indexs</string>
+	<string name="menu_oc_argentina_adr">ADRs</string>
+	<string name="menu_price_acquire">Acquire Price</string>
+	<string name="menu_price_report">Report Price</string>
+	<string name="menu_test_operations">Test Operations</string>
+	<string name="menu_portfolio">Portfolio</string>
+	<string name="menu_settins">Settings</string>
+	<string name="menu_custom_operations">Custom Operations</string>
+	<string name="menu_one_operation_custom_prices">Prices</string>
+
+
+	<string name="menu_operation">Operation</string>
+	<string name="title_activity_one_operation_custom">OneOperationCustomActivity</string>
+</resources>

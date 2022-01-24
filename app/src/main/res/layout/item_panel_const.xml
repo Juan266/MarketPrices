@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginLeft="16dp"
+	android:layout_marginRight="16dp"
+	android:layout_marginTop="4dp"
+	android:layout_marginBottom="4dp"
+	android:id="@+id/panel_list_container_const">
+
+	<TextView
+		android:id="@+id/panel_list_share_name_const"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toStartOf="@id/panel_list_share_last_price_const"
+		app:layout_constraintBottom_toTopOf="@+id/panel_list_share_clock_image_const"
+		app:layout_constraintTop_toTopOf="parent"
+		android:textSize="19sp"
+		android:textStyle="bold"
+		tools:text="GGAL"	/>
+
+
+	<TextView
+		android:id="@+id/panel_list_share_last_price_const"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		android:textSize="22sp"
+		android:textStyle="bold"
+		tools:text="81.5"
+		android:gravity="right"/>
+
+	<ImageView
+		android:id="@+id/panel_list_share_clock_image_const"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		app:layout_constraintStart_toStartOf="@id/panel_list_share_name_const"
+		app:layout_constraintTop_toBottomOf="@id/panel_list_share_name_const"
+		app:srcCompat="@drawable/ic_clock_24dp" />
+
+	<TextView
+		android:id="@+id/panel_list_share_date_time_const"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="8dp"
+		android:layout_marginTop="3dp"
+		android:textSize="17sp"
+		tools:text="11:45:16"
+		android:textColor="@color/my_trade_gray_1"
+		app:layout_constraintTop_toBottomOf="@id/panel_list_share_name_const"
+		app:layout_constraintStart_toEndOf="@id/panel_list_share_clock_image_const"
+		app:layout_constraintEnd_toStartOf="@id/panel_list_share_variation_const"/>
+
+	<TextView
+		android:id="@+id/panel_list_share_variation_const"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/panel_list_share_name_const"
+		android:textSize="19sp"
+		android:textColor="@color/alizarin_crimson"
+		android:textStyle="bold"
+		tools:text="-1,23 (-1.51 %)"
+		android:gravity="right"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
