@@ -9,7 +9,8 @@ import kotlinx.android.synthetic.main.item_chip_share_filter.view.*
 
 class ShareFilterChipHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private lateinit var chip: ChipView
+    //private lateinit var chip: ChipView
+    lateinit var chip: ChipView
 
     fun bindItem(shareFilterItem: ShareFilter, listener: OnShareFilterClick) = with(itemView) {
         chip = item_chip_share_filter_pill
@@ -17,14 +18,6 @@ class ShareFilterChipHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         chip.setColor(if (shareFilterItem.isReset!!) R.color.colorAccent else R.color.my_trade_yellow)
         chip.setTextColor(if (shareFilterItem.isReset!!) R.color.white else R.color.black)
-        itemView.setOnClickListener {
-            if (listener != null) {
-                if (shareFilterItem.isReset!!) {
-                    listener.onResetShareFilterClick()
-                } else {
-                    listener.onItemShareFilterClick(shareFilterItem.id!!)
-                }
-            }
-        }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.stock.market.ui.components
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,11 +12,31 @@ class ShareFilterChipAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private lateinit var data: List<ShareFilter>
     private lateinit var listener: OnShareFilterClick
+    private var selectedShareFilterItemPosition: Int = 6
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         if (holder is ShareFilterChipHolder) {
             val shareFilterItem = data[position]
             holder.bindItem(shareFilterItem, listener)
+
+            holder.itemView.setOnClickListener {
+                if (listener != null) {
+                    selectedShareFilterItemPosition = position
+                    if (shareFilterItem.isReset!!) {
+                        listener.onResetShareFilterClick()
+                    } else {
+                        listener.onItemShareFilterClick(shareFilterItem.id!!)
+                    }
+                    notifyDataSetChanged()
+                }
+            }
+            if (selectedShareFilterItemPosition == position && !(shareFilterItem.isReset!!)) {
+                holder.chip.setColor(R.color.white)
+                holder.chip.setTextColor(R.color.black)
+            } else if (!(shareFilterItem.isReset!!)) {
+                holder.chip.setColor(R.color.my_trade_yellow)
+                holder.chip.setTextColor(R.color.black)
+            }
         }
     }
 

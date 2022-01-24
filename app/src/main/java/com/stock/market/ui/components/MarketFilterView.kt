@@ -38,9 +38,10 @@ class MarketFilterView: RelativeLayout, OnMarketFilterClick {
             val linearLayoutManager = LinearLayoutManager(context)
             linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
             shareListFilters?.setLayoutManager(linearLayoutManager)
-
             val dividerItemDecoration = DividerItemDecoration(context,LinearLayoutManager.HORIZONTAL)
-            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.divider_list)!!)
+            //val dividerItemDecoration = DividerItemDecorationLastExcluded(
+                //ContextCompat.getDrawable(context, R.drawable.divider_market_filter_list)!!)
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.divider_market_filter_list)!!)
             shareListFilters?.addItemDecoration(dividerItemDecoration)
 
             setData()
