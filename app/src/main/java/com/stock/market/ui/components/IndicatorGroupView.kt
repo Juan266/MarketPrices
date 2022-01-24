@@ -40,6 +40,13 @@ class IndicatorGroupView : ConstraintLayout, OnVariationClickListener {
             indicatorGroupTitle = indicator_group_title
             indicatorGroupRecyclerView = indicator_group_list
 
+
+            indicatorGroupRecyclerView.adapter = indicatorsAdapter
+            val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            itemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.shape_indicators_divider)!!)
+            indicatorGroupRecyclerView.addItemDecoration(itemDecoration)
+            indicatorGroupRecyclerView.setNestedScrollingEnabled(false)
+
         }
     }
 
@@ -57,11 +64,7 @@ class IndicatorGroupView : ConstraintLayout, OnVariationClickListener {
             }
         })
         indicatorGroupRecyclerView.setLayoutManager(gridLayoutManager)
-        indicatorGroupRecyclerView.adapter = indicatorsAdapter
-        val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        itemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.shape_indicators_divider)!!)
-        indicatorGroupRecyclerView.addItemDecoration(itemDecoration)
-        indicatorGroupRecyclerView.setNestedScrollingEnabled(false)
+
         indicatorsAdapter.updateData(listItems)
     }
 

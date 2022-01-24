@@ -25,6 +25,7 @@
 				android:id="@+id/indicator_group_percentage_gainers"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
 				app:layout_constraintLeft_toLeftOf="parent"
 				app:layout_constraintTop_toBottomOf="@id/indicator_market_filter">
 			</com.stock.market.ui.components.IndicatorGroupView>
@@ -33,6 +34,7 @@
 				android:id="@+id/indicator_group_percentage_losers"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
 				app:layout_constraintLeft_toLeftOf="parent"
 				app:layout_constraintTop_toBottomOf="@+id/indicator_group_percentage_gainers">
 			</com.stock.market.ui.components.IndicatorGroupView>
