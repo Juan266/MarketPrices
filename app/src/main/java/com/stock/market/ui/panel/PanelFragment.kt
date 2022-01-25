@@ -106,8 +106,12 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
         countrySelected = marketFilterItem.country
 
         modelPanel.getPanel(filterItemSelected, marketItemSelected, countrySelected)
-        binding.panelFilterViewSectors.visibility = if (marketItemSelected.uppercase() == DEFAULT_MARKET_SELECTED.uppercase())
-            View.VISIBLE else View.GONE
+        if (marketItemSelected.uppercase() == DEFAULT_MARKET_SELECTED.uppercase()) {
+            binding.panelFilterViewSectors.visibility = View.VISIBLE
+            binding.panelFilterViewSectors.setData()
+        } else {
+            binding.panelFilterViewSectors.visibility = View.GONE
+        }
     }
 
 
