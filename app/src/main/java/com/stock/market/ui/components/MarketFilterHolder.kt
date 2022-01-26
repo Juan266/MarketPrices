@@ -11,13 +11,12 @@ import kotlinx.android.synthetic.main.item_market_filter.view.*
 
 class MarketFilterHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    //private lateinit var marketName: TextView
     lateinit var marketName: TextView
 
 
     fun bindItem(marketFilterItem: MarketFilter, listener: OnMarketFilterClick) = with(itemView) {
         marketName = item_market_filter
-        marketName.setText(marketFilterItem.name.toString())
+        marketName.setText(marketFilterItem.nameToShow)
         /*itemView.setOnClickListener {
             if (listener != null) {
                 selectedItemPosition = position

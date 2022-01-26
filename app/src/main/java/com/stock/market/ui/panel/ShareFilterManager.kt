@@ -6,9 +6,10 @@ import com.stock.market.domain.model.ShareFilter
 fun getMarketFilters(): List<MarketFilter> {
     var result = mutableListOf<MarketFilter>()
     result.add(MarketFilter(1, "Merval 25", "Merval 25", "argentina"))
-    result.add(MarketFilter(2, "SP500", "SyP500", "estados_unidos"))
-    result.add(MarketFilter(3, "Nasdaq 100", "Nasdaq 100", "estados_unidos"))
-    result.add(MarketFilter(4, "Dow Jones Industrial", "Dow Jones", "estados_unidos"))
+    result.add(MarketFilter(2, "cedears", "Cedears", "argentina"))
+    result.add(MarketFilter(3, "SP500", "SyP500", "estados_unidos"))
+    result.add(MarketFilter(4, "Nasdaq 100", "Nasdaq 100", "estados_unidos"))
+    result.add(MarketFilter(5, "Dow Jones Industrial", "Dow Jones", "estados_unidos"))
     return result
 }
 

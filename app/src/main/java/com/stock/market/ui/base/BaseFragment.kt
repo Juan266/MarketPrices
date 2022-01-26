@@ -58,13 +58,13 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         if (hasMenu()) {
             inflater.inflate(getMenuResId(), menu)
         }
         super.onCreateOptionsMenu(menu, inflater)
-    }
+    }*/
 
     open fun getMenuResId(): Int {
         return DEFAULT_INT_VALUE
