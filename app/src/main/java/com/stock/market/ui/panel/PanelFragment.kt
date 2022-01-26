@@ -140,17 +140,17 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
         })
 
         //Expand Collapse listener
-        /*item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+        item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-                //showToast("Action Collapse")
+                Toast.makeText(context, "Action Collapse", Toast.LENGTH_SHORT).show()
                 return true
             }
 
             override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-                //showToast("Action Expand")
+                Toast.makeText(context, "Action Expand", Toast.LENGTH_LONG).show()
                 return true
             }
-        })*/
+        })
         return super.onCreateOptionsMenu(menu, inflater)
 
 
