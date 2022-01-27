@@ -7,10 +7,13 @@ import com.stock.market.domain.repository.SplashRepository
 import com.stock.market.utils.SharedPreferenceUtils
 import com.stock.market.utils.getPassword
 import com.stock.market.utils.getUserName
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class SplashViewModel(private val splashRepository: SplashRepository): BaseViewModel() {
+@HiltViewModel
+class SplashViewModel @Inject constructor(private val splashRepository: SplashRepository): BaseViewModel() {
     val getTokenError: MutableLiveData<Boolean> = MutableLiveData()
     val getTokenSuccess: MutableLiveData<Boolean> = MutableLiveData()
 

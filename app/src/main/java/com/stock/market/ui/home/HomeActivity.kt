@@ -1,17 +1,24 @@
 package com.stock.market.ui.home
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.stock.market.BaseActivity
 import com.stock.market.R
+import com.stock.market.ui.components.IndicatorView
 import com.stock.market.ui.indicators.IndicatorsFragment
 import com.stock.market.ui.panel.PanelFragment
+import com.stock.market.ui.panel.PanelViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class HomeActivity: BaseActivity() {
+@AndroidEntryPoint
+class HomeActivity: BaseActivity(), IHomeActivity {
 
     lateinit var bottomNavigationView: BottomNavigationView
+
+    private val viewModelPanel by viewModels<PanelViewModel>()
+
 
     override fun getLayout() = R.layout.activity_home
 
@@ -36,5 +43,9 @@ class HomeActivity: BaseActivity() {
         if (supportActionBar != null) {
             supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         }
+    }
+
+    override fun getPanelViewModel(): PanelViewModel {
+        return viewModelPanel
     }
 }

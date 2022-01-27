@@ -33,7 +33,10 @@ abstract class BaseFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callback = context as IActivity
+        defineAdditionalCallbacks(context)
     }
+
+    protected abstract fun defineAdditionalCallbacks(context: Context)
 
     protected fun goTo(classToGo: Class<*>, finishActivity: Boolean) {
         if (activity != null && isAdded) {

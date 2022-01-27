@@ -8,10 +8,13 @@ import com.stock.market.DEFAULT_MARKET_SELECTED
 import com.stock.market.domain.model.Share
 import com.stock.market.domain.repository.PanelRepository
 import com.stock.market.utils.setShares
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class PanelViewModel(private val panelRepositoty: PanelRepository): BaseViewModel() {
+@HiltViewModel
+class PanelViewModel @Inject constructor(private val panelRepositoty: PanelRepository): BaseViewModel() {
 
     var panelListData: MutableLiveData<Array<Share>> = MutableLiveData()
     var filterIdData: MutableLiveData<Int> = MutableLiveData()

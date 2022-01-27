@@ -1,5 +1,6 @@
 package com.stock.market.ui.indicators
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +11,20 @@ import com.stock.market.DEFAULT_INT_VALUE
 import com.stock.market.R
 import com.stock.market.domain.model.MarketFilter
 import com.stock.market.domain.model.Share
+import com.stock.market.ui.home.IHomeActivity
 import com.stock.market.ui.panel.OnMarketFilterClick
 import com.stock.market.ui.panel.PanelViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
 
-
+@AndroidEntryPoint
 class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
 
     private lateinit var binding: com.stock.market.databinding.FragmentIndicatorsBinding
-    private val modelIndicators: PanelViewModel by viewModel()
     private lateinit var listIndicators: List<Share>
 
-    //private var indicatorsAdapter = PercentageVariationAdapter(this)
+    lateinit var callbackHomeActivity: IHomeActivity
 
     override fun getLayout(): Int {
         return R.layout.fragment_indicators
@@ -39,7 +40,7 @@ class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.indicatorMarketFilter.setListener(this)
-        modelIndicators.panelListData.observe(viewLifecycleOwner, {
+        callbackHomeActivity.getPanelViewModel().panelListData.observe(viewLifecycleOwner, {
             if (it != null) {
                 setListIndicators(it)
             }
@@ -62,7 +63,11 @@ class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
     }
 
     override fun onItemMarketFilterClick(marketFilterItem: MarketFilter) {
-        modelIndicators.getPanel(DEFAULT_INT_VALUE, marketFilterItem.name, marketFilterItem.country)
+        callbackHomeActivity.getPanelViewModel().getPanel(DEFAULT_INT_VALUE, marketFilterItem.name, marketFilterItem.country)
+    }
+
+    override fun defineAdditionalCallbacks(context: Context) {
+        callbackHomeActivity = context as IHomeActivity
     }
 
 }
