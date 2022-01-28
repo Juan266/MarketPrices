@@ -37,16 +37,15 @@ class SplashFragment : BaseFragment() {
 
         callbackSplashActivity.getSplashViewModel().resolveToken(getUserName(), getPassword())
 
-        callbackSplashActivity.getSplashViewModel().getTokenSuccess.observe(viewLifecycleOwner, Observer { success ->
+        callbackSplashActivity.getSplashViewModel().resultToken.observe(viewLifecycleOwner, Observer { success ->
             if (success != null) {
                 //TODO: move to result code
                 goTo(HomeActivity::class.java, true)
             }
         })
 
-        callbackSplashActivity.getSplashViewModel().getTokenError.observe(viewLifecycleOwner,  Observer {
-            Toast.makeText(requireContext(), "Getting token error", Toast.LENGTH_LONG)
-            //goTo(HomeActivity::class.java, true)
+        callbackSplashActivity.getSplashViewModel().errorToken.observe(viewLifecycleOwner,  Observer {
+            Toast.makeText(requireContext(), "Getting token error", Toast.LENGTH_LONG).show()
         })
         return binding.root
     }

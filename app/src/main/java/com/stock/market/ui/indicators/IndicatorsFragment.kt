@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.stock.market.BaseFragment
 import com.stock.market.DEFAULT_INT_VALUE
@@ -40,10 +41,14 @@ class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.indicatorMarketFilter.setListener(this)
-        callbackHomeActivity.getPanelViewModel().panelListData.observe(viewLifecycleOwner, {
+
+        callbackHomeActivity.getPanelViewModel().result.observe(viewLifecycleOwner, {
             if (it != null) {
-                setListIndicators(it)
+                setListIndicators(it.shares!!)
             }
+        })
+        callbackHomeActivity.getPanelViewModel().error.observe(viewLifecycleOwner, {
+            Toast.makeText(context, "Error Indicators" + it.toString(), Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -63,7 +68,7 @@ class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
     }
 
     override fun onItemMarketFilterClick(marketFilterItem: MarketFilter) {
-        callbackHomeActivity.getPanelViewModel().getPanel(DEFAULT_INT_VALUE, marketFilterItem.name, marketFilterItem.country)
+        callbackHomeActivity.getPanelViewModel().getPanel(marketFilterItem.name, marketFilterItem.country)
     }
 
     override fun defineAdditionalCallbacks(context: Context) {

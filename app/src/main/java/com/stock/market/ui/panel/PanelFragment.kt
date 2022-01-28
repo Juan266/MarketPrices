@@ -9,12 +9,12 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.stock.market.*
 import com.stock.market.domain.model.MarketFilter
+import com.stock.market.domain.model.NetworkResult
 import com.stock.market.domain.model.Share
 import com.stock.market.ui.home.IHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +30,6 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
     private var marketItemSelected = DEFAULT_MARKET_SELECTED
     private var countrySelected = DEFAULT_COUNTRY
 
-    //val PS_DATA: String = "number"
     lateinit var callbackHomeActivity: IHomeActivity
 
     override fun getLayout(): Int {
@@ -62,7 +61,21 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
 
     private fun setPanelList() {
         binding.panelList.adapter = adapterPanel
-        this.callbackHomeActivity.getPanelViewModel().panelListData.observe(viewLifecycleOwner, {
+        this.callbackHomeActivity.getPanelViewModel().result.observe(viewLifecycleOwner, {
+            binding.panelSwipeRefresh.isRefreshing = false
+            binding.panelProgressBar.visibility = View.GONE
+            listPanel = it.shares!!.asList()
+            adapterPanel.updatePanel(listPanel, filterItemSelected)
+        })
+        this.callbackHomeActivity.getPanelViewModel().error.observe(viewLifecycleOwner, {
+            binding.panelSwipeRefresh.isRefreshing = false
+            binding.panelProgressBar.visibility = View.GONE
+            Toast.makeText(context, "Error in getPanel" + it.toString(),
+                Toast.LENGTH_SHORT).show()
+        })
+
+
+        /*this.callbackHomeActivity.getPanelViewModel().panelListData.observe(viewLifecycleOwner, {
             if (it != null) {
                 listPanel = it.asList()
             }
@@ -82,7 +95,7 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
            } else {
                binding.panelProgressBar.visibility = View.GONE
            }
-       })
+       })*/
     }
 
     override fun openCustomOperation(share: Share) {
@@ -91,12 +104,12 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
 
     override fun onItemShareFilterClick(filterItemId: Int) {
         filterItemSelected = filterItemId
-        callbackHomeActivity.getPanelViewModel().getPanel(filterItemSelected, marketItemSelected, countrySelected)
+        callbackHomeActivity.getPanelViewModel().getPanel(marketItemSelected, countrySelected)
     }
 
     override fun onResetShareFilterClick() {
         filterItemSelected = DEFAULT_INT_VALUE
-        callbackHomeActivity.getPanelViewModel().getPanel(filterItemSelected, marketItemSelected, countrySelected)
+        callbackHomeActivity.getPanelViewModel().getPanel(marketItemSelected, countrySelected)
     }
 
     override fun onItemMarketFilterClick(marketFilterItem: MarketFilter) {
@@ -104,7 +117,7 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
         marketItemSelected = marketFilterItem.name
         countrySelected = marketFilterItem.country
 
-        callbackHomeActivity.getPanelViewModel().getPanel(filterItemSelected, marketItemSelected, countrySelected)
+        callbackHomeActivity.getPanelViewModel().getPanel(marketItemSelected, countrySelected)
         if (marketItemSelected.toUpperCase() == DEFAULT_MARKET_SELECTED.toUpperCase()) {
             binding.panelFilterViewSectors.visibility = View.VISIBLE
             binding.panelFilterViewSectors.setData()
@@ -115,7 +128,7 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
 
 
     override fun onRefresh() {
-        callbackHomeActivity.getPanelViewModel().getPanel(filterItemSelected, marketItemSelected, countrySelected)
+        callbackHomeActivity.getPanelViewModel().getPanel(marketItemSelected, countrySelected)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
