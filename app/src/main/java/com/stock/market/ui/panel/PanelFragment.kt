@@ -61,13 +61,13 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
 
     private fun setPanelList() {
         binding.panelList.adapter = adapterPanel
-        this.callbackHomeActivity.getPanelViewModel().result.observe(viewLifecycleOwner, {
+        this.callbackHomeActivity.getPanelViewModel().resultPanel.observe(viewLifecycleOwner, {
             binding.panelSwipeRefresh.isRefreshing = false
             binding.panelProgressBar.visibility = View.GONE
             listPanel = it.shares!!.asList()
             adapterPanel.updatePanel(listPanel, filterItemSelected)
         })
-        this.callbackHomeActivity.getPanelViewModel().error.observe(viewLifecycleOwner, {
+        this.callbackHomeActivity.getPanelViewModel().errorPanel.observe(viewLifecycleOwner, {
             binding.panelSwipeRefresh.isRefreshing = false
             binding.panelProgressBar.visibility = View.GONE
             Toast.makeText(context, "Error in getPanel" + it.toString(),

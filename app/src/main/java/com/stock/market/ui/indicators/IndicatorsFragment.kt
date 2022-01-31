@@ -42,12 +42,12 @@ class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
         super.onViewCreated(view, savedInstanceState)
         binding.indicatorMarketFilter.setListener(this)
 
-        callbackHomeActivity.getPanelViewModel().result.observe(viewLifecycleOwner, {
+        callbackHomeActivity.getPanelViewModel().resultPanel.observe(viewLifecycleOwner, {
             if (it != null) {
                 setListIndicators(it.shares!!)
             }
         })
-        callbackHomeActivity.getPanelViewModel().error.observe(viewLifecycleOwner, {
+        callbackHomeActivity.getPanelViewModel().errorPanel.observe(viewLifecycleOwner, {
             Toast.makeText(context, "Error Indicators" + it.toString(), Toast.LENGTH_SHORT).show()
         })
     }

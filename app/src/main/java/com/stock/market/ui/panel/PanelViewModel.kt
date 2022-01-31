@@ -18,10 +18,10 @@ import kotlinx.coroutines.flow.collect
 
 @HiltViewModel
 class PanelViewModel @Inject constructor(private val panelRepositoty: PanelRepository): BaseViewModel() {
-    val _result: MutableLiveData<PanelResponse> = MutableLiveData()
-    val result: LiveData<PanelResponse> = _result
-    val _error: MutableLiveData<String> = MutableLiveData()
-    val error: LiveData<String> = _error
+    val _resultPanel: MutableLiveData<PanelResponse> = MutableLiveData()
+    val resultPanel: LiveData<PanelResponse> = _resultPanel
+    val _errorPanel: MutableLiveData<String> = MutableLiveData()
+    val errorPanel: LiveData<String> = _errorPanel
 
     lateinit var shares: Array<Share>
 
@@ -33,10 +33,10 @@ class PanelViewModel @Inject constructor(private val panelRepositoty: PanelRepos
         panelRepositoty.getPanel(market, country).collect { values ->
             when (values) {
                 is NetworkResult.Success -> {
-                    _result.value = values.data
+                    _resultPanel.value = values.data
                 }
                 is NetworkResult.Error ->  {
-                    _error.value = values.message
+                    _errorPanel.value = values.message
                 }
             }
         }
