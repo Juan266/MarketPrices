@@ -8,6 +8,10 @@ const val DEFAULT_INT_VALUE = -1
 const val EMPTY_STRING = ""
 const val EMPTY_SHARE_PRICE = "0.00"
 
+const val UNAUTHORIZED_ERROR = 401
+const val SERVER_ERROR = 500
+const val CONNECTION_TIME_OUT = 522
+
 const val URL_TO_LOAD = "url_to_load"
 
 const val URL_INDEXS = "https://es.investing.com/indices/major-indices"

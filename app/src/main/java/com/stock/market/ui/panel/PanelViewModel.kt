@@ -1,65 +1,45 @@
 package com.stock.market.ui.panel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.stock.market.BaseViewModel
 import com.stock.market.DEFAULT_COUNTRY
-import com.stock.market.DEFAULT_INT_VALUE
 import com.stock.market.DEFAULT_MARKET_SELECTED
+import com.stock.market.data.remote.response.PanelResponse
+import com.stock.market.domain.model.ErrorApp
+import com.stock.market.domain.model.NetworkResult
 import com.stock.market.domain.model.Share
 import com.stock.market.domain.repository.PanelRepository
-import com.stock.market.utils.setShares
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 
-class PanelViewModel(private val panelRepositoty: PanelRepository): BaseViewModel() {
 
-    var panelListData: MutableLiveData<Array<Share>> = MutableLiveData()
-    var filterIdData: MutableLiveData<Int> = MutableLiveData()
-    val refreshing: MutableLiveData<Boolean> = MutableLiveData()
-    val showProgress: MutableLiveData<Boolean> = MutableLiveData()
+@HiltViewModel
+class PanelViewModel @Inject constructor(private val panelRepositoty: PanelRepository): BaseViewModel() {
+    val _resultPanel: MutableLiveData<PanelResponse> = MutableLiveData()
+    val resultPanel: LiveData<PanelResponse> = _resultPanel
+    val _errorPanel: MutableLiveData<ErrorApp> = MutableLiveData()
+    val errorPanel: LiveData<ErrorApp> = _errorPanel
 
     lateinit var shares: Array<Share>
 
     init {
-        getPanel(DEFAULT_INT_VALUE, DEFAULT_MARKET_SELECTED, DEFAULT_COUNTRY)
-        refreshing.value = false
-        showProgress.value = true
-
+        getPanel(DEFAULT_MARKET_SELECTED, DEFAULT_COUNTRY)
     }
 
-    fun getPanel(filterId: Int, market: String, country: String) {
-
-        //addDisposable(api.getPanel()
-        addDisposable(panelRepositoty.getPanel(market, country)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    refreshing.value = true
+    fun getPanel(market: String, country: String) = viewModelScope.launch {
+        panelRepositoty.getPanel(market, country).collect { values ->
+            when (values) {
+                is NetworkResult.Success -> {
+                    _resultPanel.value = values.data
                 }
-                .subscribe(
-                        { response ->
-                            if (response != null) {
-                                onGetPanelSucccess(response.shares!!, filterId)
-                            }
-                        },
-                        { error -> onGetPanelError(error) }
-                )
-        )
-    }
-
-    private fun onGetPanelSucccess(shares: Array<Share>, filterId: Int) {
-        if (filterId == DEFAULT_INT_VALUE) {
-            setShares(shares)
+                is NetworkResult.Error ->  {
+                    _errorPanel.value = values.error
+                }
+            }
         }
-        panelListData.value = shares
-        filterIdData.value = filterId
-        refreshing.value = false
-        showProgress.value = false
-    }
-
-    private fun onGetPanelError(error: Throwable) {
-        refreshing.value = false
-        showProgress.value = false
-        processError(error)
     }
 }

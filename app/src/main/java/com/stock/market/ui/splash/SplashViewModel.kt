@@ -1,18 +1,31 @@
 package com.stock.market.ui.splash
 
-import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.stock.market.BaseViewModel
+import com.stock.market.CONNECTION_TIME_OUT
+import com.stock.market.DEFAULT_INT_VALUE
+import com.stock.market.SERVER_ERROR
+import com.stock.market.data.remote.response.TokenResponse
+import com.stock.market.domain.model.ErrorApp
+import com.stock.market.domain.model.NetworkResult
 import com.stock.market.domain.repository.SplashRepository
 import com.stock.market.utils.SharedPreferenceUtils
 import com.stock.market.utils.getPassword
 import com.stock.market.utils.getUserName
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class SplashViewModel(private val splashRepository: SplashRepository): BaseViewModel() {
-    val getTokenError: MutableLiveData<Boolean> = MutableLiveData()
-    val getTokenSuccess: MutableLiveData<Boolean> = MutableLiveData()
+
+@HiltViewModel
+class SplashViewModel @Inject constructor(private val splashRepository: SplashRepository): BaseViewModel() {
+    val _resultToken : MutableLiveData<Boolean> = MutableLiveData()
+    val resultToken: LiveData<Boolean> = _resultToken
+    val _errorToken: MutableLiveData<ErrorApp> = MutableLiveData()
+    val errorToken: LiveData<ErrorApp> = _errorToken
 
     override fun resolveToken(username: String, password: String) {
         if (SharedPreferenceUtils.isEmptyToken()) {
@@ -22,52 +35,43 @@ class SplashViewModel(private val splashRepository: SplashRepository): BaseViewM
         }
     }
 
-    @SuppressLint("CheckResult")
-    fun getToken(username: String, password: String) {
-        splashRepository.getToken(username, password, "password")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {  }
-                .subscribe(
-                        { result ->
-                            val response = result
-                            if (response != null) {
-                                SharedPreferenceUtils.setToken(response.access_token!!, response.refresh_token!!)
-                                onGetTokenSuccess()
-                            }
-                        },
-                        { error ->
-                            onGetTokenError(error) }
-                )
+    fun getToken(username: String, password: String)  = viewModelScope.launch {
+        splashRepository.getToken(username, password, "password").collect { values ->
+            when (values) {
+                is NetworkResult.Success -> {
+                    onGetTokenSuccess(values.data!!)
+                }
+                is NetworkResult.Error ->  {
+                    onGetTokenError(values.error!!)
+                }
+            }
+        }
     }
 
-    @SuppressLint("CheckResult")
-    fun refreshToken() {
+    fun refreshToken() = viewModelScope.launch {
         splashRepository.refreshToken(SharedPreferenceUtils.getTokenRefreshLocal()!!,
-                "refresh_token")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {  }
-                .subscribe(
-                        { result ->
-                            val response = result
-                            if (response != null) {
-                                SharedPreferenceUtils.setToken(response.access_token!!, response.refresh_token!!)
-                                onGetTokenSuccess()
-                            }
-                        },
-                        { error -> onGetTokenError(error) }
-                )
+            "refresh_token").collect { values ->
+            when (values)  {
+                is NetworkResult.Success -> {
+                    onGetTokenSuccess(values.data!!)
+                }
+                is NetworkResult.Error -> {
+                    onGetTokenError(values.error!!)
+                }
+            }
+        }
     }
 
-    private fun onGetTokenSuccess() {
-        getTokenSuccess.value = true
+    private fun onGetTokenSuccess(tokenResponse: TokenResponse) {
+        SharedPreferenceUtils.setToken(tokenResponse.access_token!!, tokenResponse.refresh_token!!)
+        _resultToken.value = true
     }
 
-    private fun onGetTokenError(error: Throwable) {
-        SharedPreferenceUtils.clearToken()
-        resolveToken(getUserName(), getPassword())
-        getTokenError.value = true
-        ///processError(error)
+    private fun onGetTokenError(errorApp: ErrorApp) {
+       SharedPreferenceUtils.clearToken()
+        if (!(errorApp.code == CONNECTION_TIME_OUT) && !(errorApp.code == SERVER_ERROR)) {
+            resolveToken(getUserName(), getPassword())
+        }
+       _errorToken.value = errorApp
     }
 }

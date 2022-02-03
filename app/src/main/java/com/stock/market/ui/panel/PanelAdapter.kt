@@ -66,13 +66,13 @@ class PanelAdapter constructor(val listener: OnPanelClickListener) :
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val queryString = constraint?.toString()?.uppercase()
+                val queryString = constraint?.toString()?.toUpperCase()
                 val filterResults = Filter.FilterResults()
                 filterResults.values = if (queryString==null || queryString.isEmpty())
                     dataToFilter
                 else
                     dataToFilter.filter {
-                        it.symbol?.uppercase()!!.contains(queryString)
+                        it.symbol?.toUpperCase()!!.contains(queryString)
                     }
                 return filterResults
             }

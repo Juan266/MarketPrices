@@ -5,6 +5,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/splash_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black">
@@ -13,7 +14,7 @@
             android:id="@+id/splash_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MyTrade"
+            android:text="@string/app_name"
             android:textColor="@color/my_trade_yellow"
             android:textSize="50sp"
             app:layout_constraintLeft_toLeftOf="parent"
