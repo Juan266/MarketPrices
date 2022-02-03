@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.stock.market.*
 import com.stock.market.domain.model.MarketFilter
-import com.stock.market.domain.model.NetworkResult
 import com.stock.market.domain.model.Share
+import com.stock.market.ui.home.HomeActivity
 import com.stock.market.ui.home.IHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_home.*
+import java.util.*
 
 @AndroidEntryPoint
 class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnShareFilterClick, OnMarketFilterClick,
@@ -70,32 +72,9 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
         this.callbackHomeActivity.getPanelViewModel().errorPanel.observe(viewLifecycleOwner, {
             binding.panelSwipeRefresh.isRefreshing = false
             binding.panelProgressBar.visibility = View.GONE
-            Toast.makeText(context, "Error in getPanel" + it.toString(),
-                Toast.LENGTH_SHORT).show()
-        })
-
-
-        /*this.callbackHomeActivity.getPanelViewModel().panelListData.observe(viewLifecycleOwner, {
-            if (it != null) {
-                listPanel = it.asList()
-            }
-        })
-        callbackHomeActivity.getPanelViewModel().filterIdData.observe(viewLifecycleOwner, {
-            if (it != null) {
-                adapterPanel.updatePanel(listPanel, it)
-            }
+            showErrorSnackBar((activity as HomeActivity).bottomNavigationView, it.message())
 
         })
-        callbackHomeActivity.getPanelViewModel().refreshing.observe(viewLifecycleOwner, {
-            binding.panelSwipeRefresh.isRefreshing = it!!
-       })
-        callbackHomeActivity.getPanelViewModel().showProgress.observe( viewLifecycleOwner, Observer {
-           if (it) {
-               binding.panelProgressBar.visibility = View.VISIBLE
-           } else {
-               binding.panelProgressBar.visibility = View.GONE
-           }
-       })*/
     }
 
     override fun openCustomOperation(share: Share) {
@@ -118,7 +97,8 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
         countrySelected = marketFilterItem.country
 
         callbackHomeActivity.getPanelViewModel().getPanel(marketItemSelected, countrySelected)
-        if (marketItemSelected.toUpperCase() == DEFAULT_MARKET_SELECTED.toUpperCase()) {
+        if (marketItemSelected.toUpperCase(Locale.getDefault()).equals(DEFAULT_MARKET_SELECTED.toUpperCase(
+                Locale.getDefault() ))) {
             binding.panelFilterViewSectors.visibility = View.VISIBLE
             binding.panelFilterViewSectors.setData()
         } else {
@@ -134,7 +114,7 @@ class PanelFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnSh
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
 
-        val item = menu.findItem(R.id.action_search);
+        val item = menu.findItem(R.id.action_search)
         val searchView = item?.actionView as SearchView
 
         // search queryTextChange Listener

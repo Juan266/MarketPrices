@@ -36,7 +36,6 @@ class HomeActivity: BaseActivity(), IHomeActivity {
             }
             true
         }
-
     }
 
     override open fun addBackToActionBar() {

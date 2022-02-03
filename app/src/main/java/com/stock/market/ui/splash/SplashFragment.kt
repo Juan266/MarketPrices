@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.stock.market.BaseFragment
+import com.stock.market.CONNECTION_TIME_OUT
+import com.stock.market.DEFAULT_INT_VALUE
 import com.stock.market.R
 import com.stock.market.ui.home.HomeActivity
 import com.stock.market.utils.getPassword
@@ -39,13 +41,16 @@ class SplashFragment : BaseFragment() {
 
         callbackSplashActivity.getSplashViewModel().resultToken.observe(viewLifecycleOwner, Observer { success ->
             if (success != null) {
-                //TODO: move to result code
                 goTo(HomeActivity::class.java, true)
             }
         })
 
         callbackSplashActivity.getSplashViewModel().errorToken.observe(viewLifecycleOwner,  Observer {
-            Toast.makeText(requireContext(), "Getting token error", Toast.LENGTH_LONG).show()
+            if (it.code == CONNECTION_TIME_OUT) {
+                goTo(HomeActivity::class.java, true)
+            } else {
+                showErrorSnackBar(binding.splashContainer, it.message)
+            }
         })
         return binding.root
     }

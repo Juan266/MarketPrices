@@ -12,6 +12,7 @@ import com.stock.market.DEFAULT_INT_VALUE
 import com.stock.market.R
 import com.stock.market.domain.model.MarketFilter
 import com.stock.market.domain.model.Share
+import com.stock.market.ui.home.HomeActivity
 import com.stock.market.ui.home.IHomeActivity
 import com.stock.market.ui.panel.OnMarketFilterClick
 import com.stock.market.ui.panel.PanelViewModel
@@ -48,7 +49,7 @@ class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
             }
         })
         callbackHomeActivity.getPanelViewModel().errorPanel.observe(viewLifecycleOwner, {
-            Toast.makeText(context, "Error Indicators" + it.toString(), Toast.LENGTH_SHORT).show()
+            showErrorSnackBar((activity as HomeActivity).bottomNavigationView, it.message())
         })
     }
 
@@ -56,9 +57,11 @@ class IndicatorsFragment : BaseFragment(), OnMarketFilterClick {
         listIndicators = list.asList()
         var sortedListTopGainers = listIndicators.sortedWith(compareByDescending ({it.variation!!}))
         sortedListTopGainers = sortedListTopGainers.slice(1..4)
+        sortedListTopGainers = sortedListTopGainers.filter { it.variation!! > 0 }
 
         var sortedListTopLosers = listIndicators.sortedWith(compareBy ({it.variation!!}))
         sortedListTopLosers = sortedListTopLosers.slice(1..4)
+        sortedListTopLosers = sortedListTopLosers.filter { it.variation!! < 0 }
 
         binding.indicatorGroupPercentageGainers.setTitle("Top Gainers")
         binding.indicatorGroupPercentageGainers.setListItems(sortedListTopGainers)
