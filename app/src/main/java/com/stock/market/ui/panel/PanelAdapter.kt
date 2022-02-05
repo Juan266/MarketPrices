@@ -9,6 +9,7 @@ import com.stock.market.*
 import com.stock.market.DEFAULT_INT_VALUE
 import com.stock.market.domain.model.Share
 import com.stock.market.utils.*
+import kotlin.text.toUpperCase as toUpperCase
 
 class PanelAdapter constructor(val listener: OnPanelClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {

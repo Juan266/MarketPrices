@@ -10,4 +10,9 @@
       android:title="Indicators"
       android:icon="@drawable/ic_playlist_24dp"/>
 
+    <item
+      android:id="@+id/news"
+      android:title="News"
+      android:icon="@drawable/ic_playlist_24dp"/>
+
 </menu>

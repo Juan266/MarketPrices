@@ -1,8 +1,10 @@
 package com.stock.market.injection.module
 
 
+import com.stock.market.data.repository.NewsRepositoryImpl
 import com.stock.market.data.repository.PanelRepositoryImpl
 import com.stock.market.data.repository.SplashRepositoryImpl
+import com.stock.market.domain.repository.NewsRepository
 import com.stock.market.domain.repository.PanelRepository
 import com.stock.market.domain.repository.SplashRepository
 import dagger.Module
@@ -30,5 +32,11 @@ object RepositoryModule {
     @ActivityRetainedScoped
     internal fun providePanelRepository(panelRepository: PanelRepositoryImpl): PanelRepository {
         return panelRepository
+    }
+
+    @Provides
+    @ActivityRetainedScoped
+    internal fun provideNewsRepository(newsRepository: NewsRepositoryImpl): NewsRepository {
+        return newsRepository
     }
 }

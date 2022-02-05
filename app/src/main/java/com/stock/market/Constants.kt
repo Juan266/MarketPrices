@@ -14,12 +14,7 @@ const val CONNECTION_TIME_OUT = 522
 
 const val URL_TO_LOAD = "url_to_load"
 
-const val URL_INDEXS = "https://es.investing.com/indices/major-indices"
-const val URL_ADRS_ARGENTINA = "https://www.investing.com/equities/argentina-adrs"
 
-const val BCBA = "BCBA"
-
-const val EXTRA_SHARE_SYMBOL = "share_symbol"
 
 const val DEFAULT_MARKET_SELECTED = "merval 25"
 const val DEFAULT_COUNTRY = "argentina"

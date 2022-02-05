@@ -44,6 +44,7 @@ dependencies {
     def hiltLifeCycleVersion = '1.0.0-alpha03'
     def activityVersion = '1.1.0'
     def coroutinesVersion = '1.4.3'
+    def glideVersion = "4.12.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
@@ -103,6 +104,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutinesVersion"
 
     implementation "com.google.android.material:material:1.1.0"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
         transitive = true
